@@ -15,5 +15,7 @@
 
         <Button Text="Custom Content Column Class"  x:Name="CustomColumnButton"></Button>
 
+        <Button Text="CardView" x:Name="CardViewButton"></Button>
+
     </VerticalStackLayout>
 </ContentPage>
