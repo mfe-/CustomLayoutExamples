@@ -48,9 +48,9 @@ namespace CustomLayouts
         {
             var size = base.ArrangeOverride(bounds);
             Rect rect = new Rect(0, 0, minWidth, minHeight);
-            grid.Arrange(rect);
             grid.WidthRequest = minWidth;
             grid.HeightRequest = minHeight;
+            //grid.Arrange(rect); //results int Layout cycle detected.  Layout could not complete.
             System.Diagnostics.Debug.WriteLine($"ArrangeOverride width={minWidth},height={minWidth}");
             return new Size(minWidth, minHeight);
             //var width = bounds.Width;
