@@ -16,6 +16,8 @@ public partial class CardView : ContentView
     {
         InitializeComponent();
         BackgroundColor = Colors.BlueViolet;
+
+
     }
     public static readonly BindableProperty CardProperty = BindableProperty.Create(nameof(Card), typeof(object), typeof(CardView), default(object));
 
@@ -23,6 +25,14 @@ public partial class CardView : ContentView
     {
         get { return (object)GetValue(CardProperty); }
         set { SetValue(CardProperty, value); }
+    }
+
+    public static readonly BindableProperty IsMouseOverProperty = BindableProperty.Create(nameof(Card), typeof(bool), typeof(CardView), false);
+
+    public bool IsMouseOver
+    {
+        get { return (bool)GetValue(IsMouseOverProperty); }
+        set { SetValue(IsMouseOverProperty, value); }
     }
 
     //protected override Size MeasureOverride(double widthConstraint, double heightConstraint)

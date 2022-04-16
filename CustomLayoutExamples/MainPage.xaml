@@ -7,9 +7,11 @@
 
     <VerticalStackLayout Margin="10" Padding="10" Spacing="10">
 
-        <Button Text="Cascade Layout" x:Name="CascadeLayoutButton"></Button>
+        <Button Text="Cascade Layout" x:Name="CascadeLayoutButton"
+                Command="{Binding NavigateCommand}" CommandParameter="CascadeLayoutPage"></Button>
 
-        <Button Text="Horizontal Wrap Layout" x:Name="HorizontalWrapLayoutButton"></Button>
+        <Button Text="Horizontal Wrap Layout" x:Name="HorizontalWrapLayoutButton"
+                Command="{Binding Path=asdfCommand}"></Button>
 
         <Button Text="Column Layout" x:Name="ColumnLayoutButton"></Button>
 
@@ -19,7 +21,12 @@
 
         <Button Text="CardListLayout" x:Name="CardListLayoutButton"></Button>
 
-        <Button Text="CardItemsView" x:Name="CardItemsViewPageButton" />
+        <Button Text="CardItemsView" x:Name="CardItemsViewPageButton" 
+                Command="{Binding NavigateCommand}" CommandParameter="CardItemsViewPage" />
 
+        <Button Text="MyButton Handler" x:Name="MyButtonHandlerButton" 
+                Clicked="MyButtonHandlerButton_Clicked"/>
+
+        <Label Text="{Binding}" />
     </VerticalStackLayout>
 </ContentPage>
