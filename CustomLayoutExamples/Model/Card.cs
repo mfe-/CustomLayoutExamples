@@ -8,11 +8,15 @@ using System.Threading.Tasks;
 namespace CustomLayoutExamples.Model
 {
     [DebuggerDisplay("Value={Value}")]
-    public record class Card
+    public class Card
     {
         public Card(int value)
         {
             Value = value;
+        }
+        public Card()
+        {
+            Value = 0;
         }
         public int Value { get; set; }
     }

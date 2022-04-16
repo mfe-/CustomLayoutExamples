@@ -17,7 +17,7 @@ public partial class MainPage : ContentPage
         CardListLayoutButton.Clicked += CardListLayoutButton_Clicked;
         CardItemsViewPageButton.Clicked += CardItemsViewPageButton_Clicked;
         //CardListLayoutButton_Clicked(this, EventArgs.Empty);
-        CardItemsViewPageButton_Clicked(this, EventArgs.Empty);
+        //CardItemsViewPageButton_Clicked(this, EventArgs.Empty);
     }
 
     private async void CardItemsViewPageButton_Clicked(object sender, EventArgs e)

@@ -12,7 +12,8 @@
     <ContentPage.Resources>
         <DataTemplate x:Key="dt">
             <ViewCell>
-                <Button Text="1" WidthRequest="55" HeightRequest="85" />
+                <controls:CardView Card="{Binding}" WidthRequest="55" HeightRequest="85"></controls:CardView>
+                <!--<Button Text="1" WidthRequest="55" HeightRequest="85" />-->
             </ViewCell>
         </DataTemplate>
     </ContentPage.Resources>

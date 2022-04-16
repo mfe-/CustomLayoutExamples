@@ -3,10 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CustomLayoutExamples.CardPage"
              xmlns:controls="clr-namespace:CustomLayouts;assembly=CustomLayouts"
+             xmlns:models="clr-namespace:CustomLayoutExamples.Model"
              Title="CardPage">
     <StackLayout Orientation="Vertical">
         <Label x:Name="labelhw"></Label>
-        <controls:CardView x:Name="cardcontrol"></controls:CardView>
+        <controls:CardView x:Name="cardcontrol">
+            <controls:CardView.Card>
+                <models:Card>
+                    <models:Card.Value>9</models:Card.Value>
+                </models:Card>
+            </controls:CardView.Card>
+        </controls:CardView>
         <!--<controls:CustomControl></controls:CustomControl>-->
         <!--<Label Text="Welcome to .NET MAUI!"
                 VerticalOptions="Center" 

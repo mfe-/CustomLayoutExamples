@@ -17,6 +17,14 @@ public partial class CardView : ContentView
         InitializeComponent();
         BackgroundColor = Colors.BlueViolet;
     }
+    public static readonly BindableProperty CardProperty = BindableProperty.Create(nameof(Card), typeof(object), typeof(CardView), default(object));
+
+    public object Card
+    {
+        get { return (object)GetValue(CardProperty); }
+        set { SetValue(CardProperty, value); }
+    }
+
     //protected override Size MeasureOverride(double widthConstraint, double heightConstraint)
     //{
     //    //define minimum size of control
