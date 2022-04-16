@@ -50,6 +50,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Page Remove="CardItemsViewPage.xaml" />
 	  <Page Remove="CardListLayoutPage.xaml" />
 	  <Page Remove="CardPage.xaml" />
 	</ItemGroup>
@@ -70,6 +71,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="CardItemsViewPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="CardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

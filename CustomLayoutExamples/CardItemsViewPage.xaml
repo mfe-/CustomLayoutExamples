@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:CustomLayouts;assembly=CustomLayouts"
+             xmlns:local="clr-namespace:CustomLayoutExamples"
+             x:Class="CustomLayoutExamples.CardItemsViewPage"
+             
+             Title="CardItemsViewPage">
+    <ContentPage.BindingContext>
+        <local:CardItemsViewPageViewModel></local:CardItemsViewPageViewModel>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <DataTemplate x:Key="dt">
+            <ViewCell>
+                <Button Text="1" WidthRequest="55" HeightRequest="85" />
+            </ViewCell>
+        </DataTemplate>
+    </ContentPage.Resources>
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <controls:CardItemsView ItemTemplate="{StaticResource dt}" 
+                                ItemsSource="{Binding Cards}" 
+                                Grid.Column="0" Grid.Row="0">
+            <!--<controls:CardItemsView.ItemsSource>
+                <x:Array Type="{x:Type Color}">
+                    <Color>Aqua</Color>
+                    <Color>Black</Color>
+                    <Color>Blue</Color>
+                    <Color>Fuchsia</Color>
+                    <Color>Gray</Color>
+                    <Color>Green</Color>
+                    <Color>Lime</Color>
+                    <Color>Maroon</Color>
+                    <Color>Navy</Color>
+                    <Color>Olive</Color>
+                    <Color>Pink</Color>
+                    <Color>Purple</Color>
+                    <Color>Red</Color>
+                    <Color>Silver</Color>
+                    <Color>Teal</Color>
+                    <Color>White</Color>
+                    <Color>Yellow</Color>
+                </x:Array>
+            </controls:CardItemsView.ItemsSource>-->
+
+        </controls:CardItemsView>
+        <StackLayout Grid.Column="1" Grid.Row="1">
+            <Label Text="1" />
+            <Button Text="Remove" Command="{Binding RemoveCommand}" CommandParameter="{x:Null}" />
+        </StackLayout>
+        <Button Text="Add" Command="{Binding AddCommand}" Grid.Row="1" Grid.Column="0"/>
+
+    </Grid>
+</ContentPage>

@@ -5,7 +5,8 @@
              xmlns:controls="clr-namespace:CustomLayouts;assembly=CustomLayouts"
              Title="CardPage">
     <StackLayout Orientation="Vertical">
-        <controls:CardView HeightRequest="85"></controls:CardView>
+        <Label x:Name="labelhw"></Label>
+        <controls:CardView x:Name="cardcontrol"></controls:CardView>
         <!--<controls:CustomControl></controls:CustomControl>-->
         <!--<Label Text="Welcome to .NET MAUI!"
                 VerticalOptions="Center" 

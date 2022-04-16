@@ -19,5 +19,7 @@
 
         <Button Text="CardListLayout" x:Name="CardListLayoutButton"></Button>
 
+        <Button Text="CardItemsView" x:Name="CardItemsViewPageButton" />
+
     </VerticalStackLayout>
 </ContentPage>
