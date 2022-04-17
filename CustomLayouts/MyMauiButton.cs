@@ -54,10 +54,12 @@ namespace CustomLayouts
                 mauiButton.Dispatcher.Dispatch(() => mauiButton.OnMouseOverChanged(mauiButton.IsMouseOver));
             }
         }
-        private void OnMouseOverChanged(bool mouseover)
+        private async void OnMouseOverChanged(bool mouseover)
         {
             if (mouseover)
             {
+                await this.TranslateTo(0, -3, 500, Easing.Linear);
+                await this.TranslateTo(0, 3, 500, Easing.Linear);
                 _ = VisualStateManager.GoToState(this, VisualStateMouseOver);
             }
             else

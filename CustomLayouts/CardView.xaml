@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CustomLayouts.CardView"
              x:Name="cardview"
-             BackgroundColor="Red">
+             BackgroundColor="Yellow"
+             Margin="4">
   <ContentView.Content>
         <Border BackgroundColor="DarkRed">
             <Label Text="{Binding Path=Card.Value, Source={Reference cardview},Mode=OneWay}"

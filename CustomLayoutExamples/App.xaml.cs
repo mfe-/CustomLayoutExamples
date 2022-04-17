@@ -29,7 +29,26 @@ namespace CustomLayoutExamples
                     {
                         myMauiButton.IsMouseOver = false;
                     };
-                    //handler.PlatformView.Background = Colors.SaddleBrown.ToPlatform();
+#endif
+                }
+            });
+            Microsoft.Maui.Handlers.ElementHandler.ElementMapper.AppendToMapping("IsMouseOver", (handler, view) =>
+            {
+                if (view is CardView cardView)
+                {
+#if WINDOWS
+                    if(handler.PlatformView is Microsoft.Maui.Platform.ContentPanel contentPanel)
+                    {
+                        contentPanel.PointerEntered += (sender, e) =>
+                        {
+                            cardView.IsMouseOver = true;
+                        };
+                        contentPanel.PointerExited += (sender, e) =>
+                        {
+                            cardView.IsMouseOver = false;
+                        };
+                    }
+
 #endif
                 }
             });

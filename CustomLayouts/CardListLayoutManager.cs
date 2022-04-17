@@ -27,8 +27,13 @@ public class CardListLayoutManager : Microsoft.Maui.Layouts.StackLayoutManager
         double totalHeight = 0;
 
         var totalAmountItems = stackLayout.Count;
+        CardView? cardView = null;
         foreach (var child in stackLayout)
         {
+            if (cardView == null && child is CardView card)
+            {
+                cardView = card;
+            }
             var current = child.Measure(widthConstraint, heightConstraint);
             maxWidth = Math.Max(current.Width, maxWidth);
             totalWidth += current.Width;
@@ -46,7 +51,7 @@ public class CardListLayoutManager : Microsoft.Maui.Layouts.StackLayoutManager
         }
 
         return new Size(totalWidth + padding.HorizontalThickness,
-            totalHeight + padding.VerticalThickness);
+            totalHeight + padding.VerticalThickness + cardView?.TranslationYOffset ?? 0);
     }
     public override Size ArrangeChildren(Rect bounds)
     {
@@ -57,9 +62,13 @@ public class CardListLayoutManager : Microsoft.Maui.Layouts.StackLayoutManager
 
         double totalWidth = 0;
         double totalHeight = 0;
-
+        CardView? cardView = null;
         foreach (var child in stackLayout)
         {
+            if (cardView == null && child is CardView card)
+            {
+                cardView = card;
+            }
             var width = child.DesiredSize.Width;
             var height = child.DesiredSize.Height;
             child.Arrange(new Rect(x, y, width, height));
@@ -68,6 +77,6 @@ public class CardListLayoutManager : Microsoft.Maui.Layouts.StackLayoutManager
         }
 
         return new Size(totalWidth + padding.HorizontalThickness,
-            totalHeight + padding.VerticalThickness);
+            totalHeight + padding.VerticalThickness + cardView?.TranslationYOffset ?? 0);
     }
 }
