@@ -18,22 +18,52 @@
         </Style>
     </ContentPage.Resources>
     <StackLayout>
-        <controls:MyMauiButton>
-            <!--<controls:MyMauiButton.Triggers>
+        <!--<controls:MyMauiButton>
+            --><!--<controls:MyMauiButton.Triggers>
                 <Trigger Property="IsMouseOver" Value="False" TargetType="controls:MyMauiButton">
                     <Setter Property="BackgroundColor" Value="Purple" />
                 </Trigger>
                 <Trigger Property="IsMouseOver" Value="True" TargetType="controls:MyMauiButton">
                     <Setter Property="BackgroundColor" Value="Green" />
                 </Trigger>
-            </controls:MyMauiButton.Triggers>-->
+            </controls:MyMauiButton.Triggers>--><!--
+        </controls:MyMauiButton>-->
+        <controls:MyMauiButton>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal">
+                        <VisualState.Setters>
+                            <Setter Property="FontSize" Value="Body" />
+                            <Setter Property="Text" Value="Mouse is not over" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState x:Name="MouseOver">
+                        <VisualState.Setters>
+                            <!--<Setter Property="FontSize" Value="Caption" /> if you uncomment this the app wil crash-->
+                            <Setter Property="Text" Value="Mouse is over" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState x:Name="Focused">
+                        <VisualState.Setters>
+                            <Setter Property="FontSize" Value="36" />
+                        </VisualState.Setters>
+                    </VisualState>
+
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="BackgroundColor" Value="Pink" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
         </controls:MyMauiButton>
+        <!--<controls:MyMauiButton></controls:MyMauiButton>
         <controls:MyMauiButton></controls:MyMauiButton>
         <controls:MyMauiButton></controls:MyMauiButton>
         <controls:MyMauiButton></controls:MyMauiButton>
         <controls:MyMauiButton></controls:MyMauiButton>
-        <controls:MyMauiButton></controls:MyMauiButton>
-        <controls:MyMauiButton></controls:MyMauiButton>
-        <controls:MyMauiButton></controls:MyMauiButton>
+        <controls:MyMauiButton></controls:MyMauiButton>-->
     </StackLayout>
 </ContentPage>

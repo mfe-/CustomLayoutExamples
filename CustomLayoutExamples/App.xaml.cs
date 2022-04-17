@@ -24,12 +24,10 @@ namespace CustomLayoutExamples
                     handler.PlatformView.PointerEntered += (sender, e) =>
                     {
                         myMauiButton.IsMouseOver = true;
-                        System.Diagnostics.Debug.WriteLine($"PointerEntered {myMauiButton.IsMouseOver}");
                     };
                     handler.PlatformView.PointerExited += (sender, e) =>
                     {
                         myMauiButton.IsMouseOver = false;
-                        System.Diagnostics.Debug.WriteLine($"PointerExited {myMauiButton.IsMouseOver}");
                     };
                     //handler.PlatformView.Background = Colors.SaddleBrown.ToPlatform();
 #endif

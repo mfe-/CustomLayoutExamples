@@ -10,8 +10,40 @@ namespace CustomLayouts
     {
         public MyMauiButton()
         {
-            
+            Loaded += MyMauiButton_Loaded;
         }
+
+        private const string VisualCommonStates = "CommonStates";
+        private const string VisualStateMouseOver = "MouseOver";
+        private const string VisualStateNormal = "Normal";
+
+        private void MyMauiButton_Loaded(object? sender, EventArgs e)
+        {
+            var vsg = this.GetValue(VisualStateManager.VisualStateGroupsProperty) as IList<VisualStateGroup>;
+            if (vsg?.Count == 0)
+            {
+                var visualStateGroup = new VisualStateGroup();
+                visualStateGroup.Name = VisualCommonStates;
+                var normalVisualState = new VisualState() { Name = VisualStateNormal };
+                visualStateGroup.States.Add(normalVisualState);
+                vsg.Add(visualStateGroup);
+            }
+
+            //var visualStateGroupCommon = vsg?.First(a => a.Name == VisualCommonStates);
+
+            //if (visualStateGroupCommon != null && visualStateGroupCommon.States.Any(a => a.Name == VisualStateMouseOver))
+            //{
+            //    var visualStateMouseOver = new VisualState() { Name = VisualStateMouseOver };
+            //    visualStateMouseOver.Setters.Add(new Setter()
+            //    {
+            //        Property = TextColorProperty,
+            //        Value = Colors.Black
+            //    });
+
+            //    visualStateGroupCommon.States.Add(visualStateMouseOver);
+            //}
+        }
+
         public static readonly BindableProperty IsMouseOverProperty = BindableProperty.Create(nameof(MyMauiButton), typeof(bool), typeof(MyMauiButton), false,
             propertyChanged: IsMouseOverChanged);
 
@@ -19,11 +51,20 @@ namespace CustomLayouts
         {
             if (bindable is MyMauiButton mauiButton)
             {
-                System.Diagnostics.Debug.WriteLine($"IsMouseOverChanged {mauiButton.IsMouseOver}");
+                mauiButton.Dispatcher.Dispatch(() => mauiButton.OnMouseOverChanged(mauiButton.IsMouseOver));
             }
         }
-        protected bool IsPointerEntered = false;
-        protected bool IsPointerExited = false;
+        private void OnMouseOverChanged(bool mouseover)
+        {
+            if (mouseover)
+            {
+                _ = VisualStateManager.GoToState(this, VisualStateMouseOver);
+            }
+            else
+            {
+                _ = VisualStateManager.GoToState(this, VisualStateNormal);
+            }
+        }
         public bool IsMouseOver
         {
             get { return (bool)GetValue(IsMouseOverProperty); }
