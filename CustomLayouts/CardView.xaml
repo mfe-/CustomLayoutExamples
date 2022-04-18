@@ -1,16 +1,21 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:CustomLayouts"
              x:Class="CustomLayouts.CardView"
              x:Name="cardview"
              BackgroundColor="Yellow"
              Margin="4">
-  <ContentView.Content>
-        <Border BackgroundColor="DarkRed">
-            <Label Text="{Binding Path=Card.Value, Source={Reference cardview},Mode=OneWay}"
+    <ContentView.Content>
+        <controls:CardGrid>
+            <Grid>
+                <Border BackgroundColor="DarkRed">
+                    <Label Text="{Binding Path=Card.Value, Source={Reference cardview},Mode=OneWay}"
                            TextColor="DarkSeaGreen"
                            HorizontalOptions="Center"
                            VerticalOptions="Center"/>
-        </Border>
-  </ContentView.Content>
+                </Border>
+            </Grid>
+        </controls:CardGrid>
+    </ContentView.Content>
 </ContentView>

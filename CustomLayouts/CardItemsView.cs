@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace CustomLayouts
 {
-    [ContentProperty(nameof(ItemsSource))]
     public class CardItemsView : StackLayout
     {
         public CardItemsView()
@@ -38,7 +37,7 @@ namespace CustomLayouts
             if (bindable is CardItemsView cardItemsView && newValue is IEnumerable enumerable)
             {
                 cardItemsView.AddItems(enumerable);
-                if(newValue is INotifyCollectionChanged notifyCollectionChanged)
+                if (newValue is INotifyCollectionChanged notifyCollectionChanged)
                 {
                     notifyCollectionChanged.CollectionChanged += cardItemsView.NotifyCollectionChanged_CollectionChanged;
                 }
@@ -47,19 +46,24 @@ namespace CustomLayouts
 
         private void NotifyCollectionChanged_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
-            if(sender == ItemsSource)
+            if (sender == ItemsSource)
             {
-                if(e.Action == NotifyCollectionChangedAction.Remove && e.OldItems is not null)
+                if (e.Action == NotifyCollectionChangedAction.Remove && e.OldItems is not null)
                 {
                     foreach (var item in e.OldItems)
                     {
                         var container = GetContainer(item);
+                        if (container is View view && view.GestureRecognizers.Count != 0 && view.GestureRecognizers[0] is TapGestureRecognizer tap)
+                        {
+                            tap.Tapped -= TapGestureRecognizer_Tapped;
+                            view.GestureRecognizers.Remove(tap);
+                        }
                         this.Children.Remove(container);
                     }
                 }
-                else if(e.Action == NotifyCollectionChangedAction.Add && e.NewItems is not null)
+                else if (e.Action == NotifyCollectionChangedAction.Add && e.NewItems is not null)
                 {
-                    foreach(var item in e.NewItems)
+                    foreach (var item in e.NewItems)
                     {
                         AddItem(item);
                     }
@@ -84,15 +88,41 @@ namespace CustomLayouts
             if (elementView != null)
             {
                 elementView.BindingContext = item;
+                var tapGestureRecognizer = new TapGestureRecognizer();
+                tapGestureRecognizer.Parent = elementView;
+                tapGestureRecognizer.Tapped += TapGestureRecognizer_Tapped;
+                elementView.GestureRecognizers.Add(tapGestureRecognizer);
                 Children.Add(elementView);
             }
         }
 
+        private void TapGestureRecognizer_Tapped(object? sender, EventArgs e)
+        {
+            if (sender is View view)
+            {
+                SelectedItem = GetItem(view);
+            }
+        }
+
+        private object? GetItem(View? sender)
+        {
+            return sender?.BindingContext;
+        }
+
+        public static readonly BindableProperty SelectedItemProperty = BindableProperty.Create(nameof(SelectedItem), typeof(object), typeof(CardView), null);
+
+        public object? SelectedItem
+        {
+            get { return (object?)GetValue(SelectedItemProperty); }
+            set { SetValue(SelectedItemProperty, value); }
+        }
+
+
         public IView? GetContainer(object item)
         {
-            foreach(var child in Children)
+            foreach (var child in Children)
             {
-                if(child is View view && view.BindingContext == item)
+                if (child is View view && view.BindingContext == item)
                 {
                     return view;
                 }
@@ -103,7 +133,7 @@ namespace CustomLayouts
         {
             var templateContent = ItemTemplate?.CreateContent();
             if (templateContent == null) return null;
-            if(templateContent is ViewCell viewCell)
+            if (templateContent is ViewCell viewCell)
             {
                 viewCell.Parent = this;
                 viewCell.BindingContext = item;
@@ -111,6 +141,7 @@ namespace CustomLayouts
             }
             throw new NotSupportedException($"{templateContent} is not supported.");
         }
+
         public IEnumerable ItemsSource
         {
             get => (IEnumerable)GetValue(ItemsSourceProperty);

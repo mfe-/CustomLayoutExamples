@@ -2,6 +2,7 @@
 using Microsoft.Maui.Hosting;
 using Microsoft.Maui.Controls.Compatibility;
 using Microsoft.Maui.Controls.Hosting;
+using CustomLayouts;
 
 namespace CustomLayoutExamples
 {
@@ -15,6 +16,10 @@ namespace CustomLayoutExamples
 				.ConfigureFonts(fonts =>
 				{
 					fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+				})
+				.ConfigureMauiHandlers(handlers =>
+				{
+					//handlers.AddCustomLayoutControlsHandlers();
 				});
 
 			return builder.Build();

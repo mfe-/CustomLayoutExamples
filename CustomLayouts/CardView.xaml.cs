@@ -35,7 +35,7 @@ public partial class CardView : ContentView
     }
     private async void OnMouseOverChanged(bool isMouseover)
     {
-        if(isMouseover)
+        if (isMouseover)
         {
             BackgroundColor = Colors.Red;
             await this.TranslateTo(0, -TranslationYOffset, 250, Easing.Linear);
@@ -64,67 +64,44 @@ public partial class CardView : ContentView
         set { SetValue(TranslationYOffsetProperty, value); }
     }
 
-
-
-
-
     //protected override Size MeasureOverride(double widthConstraint, double heightConstraint)
     //{
-    //    //define minimum size of control
-    //    var minSize = new Size(minWidth, minHeight);
-
-    //    double totalWidth = 0;
-    //    double totalHeight = 0;
-
-    //    SizeRequest sizeRequest = grid.Measure(minSize.Width, minSize.Height);
-
-    //    System.Diagnostics.Debug.WriteLine($"MeasureOverride width={minSize.Width},height={minSize.Height}");
-    //    return minSize;
+    //    var size = base.MeasureOverride(widthConstraint, heightConstraint);
+    //    var min = Math.Min(size.Height, size.Height);
+    //    var newSize = new Size(size.Height, size.Height);
+    //    foreach (var item in Children)
+    //    {
+    //        if (item is VisualElement visualElement)
+    //        {
+    //            var x = visualElement.Measure(newSize.Width, newSize.Height, MeasureFlags.None);
+    //        }
+    //        else
+    //        {
+    //            throw new NotSupportedException("Implement a method which does something similar like Measure");
+    //        }
+    //        //var x = item.Measure(newSize.Width, newSize.Height);
+    //    }
+    //    return newSize;
     //}
-    ///// <summary>
-    ///// The purpose of arrange phase in layout pass is to position all child controls in relation to the control itself.
-    ///// </summary>
-    ///// <param name="bounds">The bounds parameter tells us how much space do we have to arrange child controls. We should treat it as final constraint (hence the name), and do not violate it.</param>
-    ///// <returns>The actual size used.</returns>
-    //protected override Size ArrangeOverride(Rect bounds) //bounds = { X=0, Y=0, Width=1013, Height=0 } 
+    //protected override Size ArrangeOverride(Rect bounds)
     //{
-    //    var size = base.ArrangeOverride(bounds);
-    //    Rect rect = new Rect(0, 0, minWidth, minHeight);
-    //    grid.WidthRequest = minWidth;
-    //    grid.HeightRequest = minHeight;
-    //    //grid.Arrange(rect); //results int Layout cycle detected.  Layout could not complete.
-    //    System.Diagnostics.Debug.WriteLine($"ArrangeOverride width={minWidth},height={minWidth}");
-    //    return new Size(minWidth, minHeight);
-    //    //var width = bounds.Width;
-    //    //var height = bounds.Height;
-
-    //    //if (height <= minHeight)
-    //    //{
-    //    //    width = minWidth;
-    //    //    height = minHeight;
-    //    //}
-    //    //grid.WidthRequest = width;
-    //    //grid.HeightRequest = height;
-    //    //return new Size(width, height);
-    //    //if (height == minHeight)
-    //    //{
-    //    //    width = minWidth;
-    //    //}
-    //    ////align values to our ratio
-    //    //if (!double.IsFinite(height))
-    //    //{
-    //    //    width = height * (minHeight / minWidth);
-    //    //}
-    //    //grid.WidthRequest = width;
-    //    //grid.HeightRequest = height;
-    //    ////propage calculated size to grid
-    //    ////grid.Arrange(new Rect(0, 0, width, height));
-
-
-    //    ////grid.Arrange(bounds);
-    //    ////grid.Arrange(new Rect(new Point(bounds.Location.X+5,bounds.Location.Y+5),new Size(180,180)));
-    //    //return new Size(width,height);
-
+    //    //var arrange = base.ArrangeOverride(bounds);
+    //    var min = Math.Min(bounds.Height, bounds.Height);
+    //    var newSize = new Size(min, min);
+    //    foreach (var item in Children)
+    //    {
+    //        if (item is VisualElement visualElement)
+    //        {
+    //            //visualElement.WidthRequest = newSize.Width;
+    //            //visualElement.HeightRequest = newSize.Height;
+    //            visualElement.Arrange(new Rect(0, 0, newSize.Width, newSize.Height));
+    //        }
+    //        else
+    //        {
+    //            throw new NotSupportedException("Implement a method which does something similar like Arrange");
+    //        }
+    //    }
+    //    return newSize;
     //}
     protected override void OnSizeAllocated(double width, double height)
     {

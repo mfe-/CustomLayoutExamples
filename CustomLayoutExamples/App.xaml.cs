@@ -6,53 +6,48 @@ using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Platform;
 using Application = Microsoft.Maui.Controls.Application;
 
-namespace CustomLayoutExamples
+namespace CustomLayoutExamples;
+
+public partial class App : Application
 {
-    public partial class App : Application
+    public App()
     {
-        public App()
+        InitializeComponent();
+
+        MainPage = new NavigationPage(new MainPage());
+
+        Microsoft.Maui.Handlers.ButtonHandler.Mapper.AppendToMapping("IsMouseOver", (handler, view) =>
         {
-            InitializeComponent();
-
-            MainPage = new NavigationPage(new MainPage());
-
-            Microsoft.Maui.Handlers.ButtonHandler.Mapper.AppendToMapping("IsMouseOver", (handler, view) =>
+            if (view is MyMauiButton myMauiButton)
             {
-                if (view is MyMauiButton myMauiButton)
-                {
 #if WINDOWS
-                    handler.PlatformView.PointerEntered += (sender, e) =>
-                    {
-                        myMauiButton.IsMouseOver = true;
-                    };
-                    handler.PlatformView.PointerExited += (sender, e) =>
-                    {
-                        myMauiButton.IsMouseOver = false;
-                    };
+                handler.PlatformView.PointerEntered += (sender, e) =>
+                {
+                    myMauiButton.IsMouseOver = true;
+                };
+                handler.PlatformView.PointerExited += (sender, e) =>
+                {
+                    myMauiButton.IsMouseOver = false;
+                };
 #endif
-                }
-            });
-            Microsoft.Maui.Handlers.ElementHandler.ElementMapper.AppendToMapping("IsMouseOver", (handler, view) =>
+            }
+        });
+        Microsoft.Maui.Handlers.ElementHandler.ElementMapper.AppendToMapping("IsMouseOver", (handler, view) =>
+        {
+#if WINDOWS
+            if (view is CardView cardView && handler.PlatformView is ContentPanel contentPanel)
             {
-                if (view is CardView cardView)
+                contentPanel.PointerEntered += (sender, e) =>
                 {
-#if WINDOWS
-                    if(handler.PlatformView is Microsoft.Maui.Platform.ContentPanel contentPanel)
-                    {
-                        contentPanel.PointerEntered += (sender, e) =>
-                        {
-                            cardView.IsMouseOver = true;
-                        };
-                        contentPanel.PointerExited += (sender, e) =>
-                        {
-                            cardView.IsMouseOver = false;
-                        };
-                    }
-
+                    cardView.IsMouseOver = true;
+                };
+                contentPanel.PointerExited += (sender, e) =>
+                {
+                    cardView.IsMouseOver = false;
+                };
+            }
 #endif
-                }
-            });
-        }
+        });
 
 
     }
