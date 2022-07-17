@@ -29,7 +29,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <controls:CardItemsView ItemTemplate="{StaticResource dt}" 
-                                ItemsSource="{Binding Cards}" 
+                                ItemsSource="{Binding Cards,Mode=TwoWay}" 
                                 Grid.Column="0" Grid.Row="0">
             <!--<controls:CardItemsView.ItemsSource>
                 <x:Array Type="{x:Type Color}">
